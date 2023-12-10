@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Propietats per connectar via JDBC</comment>
+    <entry key="url">jdbc:oracle:thin:@192.168.83.203:1521/XEPDB1</entry>
+    <!-- <entry key="url">jdbc:oracle:thin:@192.168.1.203:1521/XEPDB1</entry> -->
+    <!-- <entry key="url">jdbc:oracle:thin:@192.168.18.203:1521/XEPDB1</entry> -->
+
+    <entry key="user">alumne</entry>
+    <entry key="password">alumne</entry>
+</properties>
