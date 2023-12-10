@@ -23,6 +23,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static capavista.Rutes.punts;
 import java.awt.event.ActionEvent;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -435,9 +437,14 @@ public class CrearRuta extends javax.swing.JFrame {
         
             int id = gBD.afegirRuta(r);
             r.setId(id);
-            System.out.println("ruta id: "+r.getId());
+            //System.out.println("ruta id: "+r.getId());
             if(punts != null){
+                //control de numeros per poder insertar en la base de dades;
+                Collections.sort(punts, Comparator.comparingInt(Punt::getNum));
+                int i = 1;
                 for(Punt p: punts){
+                    p.setNum(i);
+                    i++;
                     p.setRuta(r);
                     gBD.afegirPunt(p);
                 }
@@ -450,14 +457,12 @@ public class CrearRuta extends javax.swing.JFrame {
             rutesVista.setVisible(true);
             dispose();
         }
-        
-        
     }//GEN-LAST:event_crearButtonActionPerformed
 
     private void buttonModPuntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonModPuntActionPerformed
         // TODO add your handling code here:
         errorLabel.setText(" ");
-        System.out.println("Selected Row: "+ tablePunts.getSelectedRow()+ " Punts.length: "+punts.size());
+        //System.out.println("Selected Row: "+ tablePunts.getSelectedRow()+ " Punts.length: "+punts.size());
         if(tablePunts.getSelectedRow() != -1){
             ModificarPunt modPunt = new ModificarPunt(this, tablePunts.getSelectedRow());
             

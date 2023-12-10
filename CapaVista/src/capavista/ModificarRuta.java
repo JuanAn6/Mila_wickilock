@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -403,7 +405,7 @@ public class ModificarRuta extends javax.swing.JFrame {
             create = false;
             errorText = "La distancia no pot ser tan llarga";
         }
-        if ( (int) distanciaSpinner.getValue() <= 0 ){
+        if ( Float.parseFloat(""+distanciaSpinner.getValue()) <= 0 ){
             create = false;
             errorText = "La distancia ha de ser mes llarga";
         }
@@ -420,7 +422,7 @@ public class ModificarRuta extends javax.swing.JFrame {
             create = false;
             errorText = "Has de seleccionar una dificulatat valida";
         }
-        if((int) tempsSpinner.getValue() <= 0){
+        if( Integer.parseInt(""+tempsSpinner.getValue()) <= 0){
             create = false;
             errorText = "El temps ha de ser un numero enter positiu";
         }
@@ -441,23 +443,29 @@ public class ModificarRuta extends javax.swing.JFrame {
             String dif = (String) dificultatCombo.getSelectedItem();
             r.setDificultat(Integer.parseInt(dif.charAt(0)+""));
 
-            r.setTime( (int) tempsSpinner.getValue());
+            r.setTime( Integer.parseInt(""+tempsSpinner.getValue()));
 
             Date data = new Date();
             r.setData(data);
             gBD.actualitzarRuta(r);
 
-            System.out.println("ruta id: "+r.getId());
+            //System.out.println("ruta id: "+r.getId());
             if(punts != null){
+                //control de numeros per poder insertar en la base de dades;
+                Collections.sort(punts, Comparator.comparingInt(Punt::getNum));
+                int i = 1;
                 for(Punt p: punts){
-                    System.out.println("Nom del punt: "+p.getNom()+" Id del punt: "+p.getId());
+                    p.setNum(i);
+                    i++;
                     p.setRuta(r);
+                    if(p.getDescripcio() == null){
+                        p.setDescripcio("");
+                    }
                     if(p.getId() == -1){
                         gBD.afegirPunt(p);
                     }else{
                         gBD.actualitzarPunt(p);
                     }
-
                 }
             }
             gBD.confirmarCanvis();

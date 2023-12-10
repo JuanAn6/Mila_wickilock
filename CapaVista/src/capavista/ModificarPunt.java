@@ -38,8 +38,9 @@ public class ModificarPunt extends javax.swing.JFrame {
         
         //desplegable de tipus: 
         List<TipusPunt> elements = gBD.obtenirLlistaTipusPunts();
-        String[] items = new String[elements.size()];
-        int i = 0;
+        String[] items = new String[elements.size()+1]; //per poder afegir el espai en blanc per als tipus de punts
+        int i = 1;
+        items[0] = " ";
         for(TipusPunt p : elements){
             items[i] = p.getId()+ " - "+p.getNom();
             i++;
@@ -51,7 +52,11 @@ public class ModificarPunt extends javax.swing.JFrame {
         
         numSpinner.setValue(punt_mod.getNum());
         nomField.setText(punt_mod.getNom());
-        descriptionArea.setText(punt_mod.getDescripcio());
+        if(punt_mod.getDescripcio() == null){
+            descriptionArea.setText("");
+        }else{
+            descriptionArea.setText(punt_mod.getDescripcio());
+        }
         latField.setValue(punt_mod.getLat());
         lonField.setValue(punt_mod.getLon());
         altitudSpinner.setValue(punt_mod.getAlt());
@@ -280,7 +285,9 @@ public class ModificarPunt extends javax.swing.JFrame {
             p.setAlt((int) altitudSpinner.getValue());
 
             String tipusString = tipusCombo.getSelectedItem()+"";
-            p.setTipus(gBD.obtenirTipusPunt(Integer.parseInt(tipusString.charAt(0)+"")));
+            
+            int posicio = tipusString.indexOf(" -");
+            p.setTipus(gBD.obtenirTipusPunt(Integer.parseInt(tipusString.substring(0, posicio)+"")));
 
             punts.set(pos, p);
 

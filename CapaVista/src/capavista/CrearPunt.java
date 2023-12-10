@@ -37,7 +37,7 @@ public class CrearPunt extends javax.swing.JFrame {
         
         //desplegable de tipus: 
         List<TipusPunt> elements = gBD.obtenirLlistaTipusPunts();
-        String[] items = new String[elements.size()+1];
+        String[] items = new String[elements.size()+1]; //per poder afegir el espai en blanc per als tipus de punts
         int i = 1;
         items[0] = " ";
         for(TipusPunt p : elements){
@@ -267,7 +267,9 @@ public class CrearPunt extends javax.swing.JFrame {
             p.setAlt((int) altitudSpinner.getValue());
 
             String tipusString = tipusCombo.getSelectedItem()+"";
-            p.setTipus(gBD.obtenirTipusPunt(Integer.parseInt(tipusString.charAt(0)+"")));
+            
+            int posicio = tipusString.indexOf(" -");
+            p.setTipus(gBD.obtenirTipusPunt(Integer.parseInt(tipusString.substring(0, posicio)+"")));
 
             punts.add(p);
 
