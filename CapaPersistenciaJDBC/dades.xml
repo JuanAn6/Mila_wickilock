@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment>Propietats per connectar via JDBC</comment>
-    <entry key="url">jdbc:oracle:thin:@10.2.77.160:1521/XEPDB1</entry>
+    <entry key="url">jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1</entry>
     <entry key="user">alumne</entry>
     <entry key="password">alumne</entry>
 </properties>
