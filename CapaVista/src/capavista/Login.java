@@ -36,6 +36,11 @@ public class Login extends JFrame {
     
     protected static IGestorPersistencia gBD = null;
     protected static User u = null;
+
+    private static void Error(String s) {
+        //Error e = new Error(this, true , s);
+        //e.setVisible(true);
+    }
     
     private JPanel principal = new JPanel();
     private JLabel titol = new JLabel();
@@ -204,6 +209,15 @@ public class Login extends JFrame {
             gBD = (IGestorPersistencia) Class.forName(nomClassePersistencia).newInstance();
             System.out.println("Connexió establerta");
         } catch (Exception ex) {
+//            Exception aux = ex;
+//            do{
+//                System.out.println(aux.getMessage());
+//                aux = aux.getCause();
+//            }while(aux != null);
+            if(ex.getCause() != null){
+                Error(""+ex.getCause().getMessage());
+                System.out.println("Error: "+ ex.getCause().getMessage());
+            }
             System.out.println(ex.getMessage()+" "+ ex.getStackTrace());
         }
         

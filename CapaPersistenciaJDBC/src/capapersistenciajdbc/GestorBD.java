@@ -51,8 +51,8 @@ public class GestorBD implements IGestorPersistencia {
                 //System.out.println(valors[i].toString());
             }
             
-            //con = DriverManager.getConnection(valors[0], valors[1], valors[2]); //linia que execta la connexió;
-            con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1", "alumne", "alumne");
+            con = DriverManager.getConnection(valors[0], valors[1], valors[2]); //linia que execta la connexió;
+            //con = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1", "alumne", "alumne");
             con.setAutoCommit(false); //linia imortant perque per defecte JDBCoracle fa autocommit;
         } catch (IOException ex) {
             throw new IGestorException("Problemes en recuperar l'arxiu de configuració " + nomFitxer, ex);
