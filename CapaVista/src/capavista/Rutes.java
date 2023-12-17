@@ -10,17 +10,28 @@ import capamodel.User;
 import static capavista.Login.gBD;
 import interficiepersistencia.IGestorPersistencia;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import static java.lang.System.out;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -42,6 +53,12 @@ public class Rutes extends javax.swing.JFrame {
      */
     protected static ArrayList<Punt> punts = new ArrayList();
     private List<Ruta> rutes = null;
+    
+    // Variables per dades de connexió amb JRS
+    private String urlJRS;
+    private String userJRS;
+    private String passwordJRS;
+    
     public Rutes(User u) {
         initComponents();
         slideAltitud.setValue(0);
@@ -116,6 +133,28 @@ public class Rutes extends javax.swing.JFrame {
                 }
             }
         });
+        
+        String fitxerConfigJRS = "informesJRS.xml";
+        try {
+            Properties props = new Properties();
+            props.loadFromXML(new FileInputStream(fitxerConfigJRS));
+            String[] claus = {"url", "user", "password"};
+            String[] valors = new String[3];
+            for (int i = 0; i < claus.length; i++) {
+                valors[i] = props.getProperty(claus[i]);
+                if (valors[i] == null || valors[i].isEmpty()) {
+                    System.out.println("No es troba clau " + valors[i] + " en fitxer " + fitxerConfigJRS);
+                }
+            }
+            urlJRS = valors[0];
+            userJRS = valors[1];
+            passwordJRS = valors[2];
+            System.out.println("Paràmetres per connectar amb JRS recuperats.");
+        } catch (FileNotFoundException ex) {
+            System.out.println("No es troba fitxer " + fitxerConfigJRS + " - No es podrà executar cap informe");
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage() + " - Probablement no es podrà executar cap informe");
+        }
         
         this.addWindowListener(
                 new WindowAdapter() {
@@ -584,8 +623,89 @@ public class Rutes extends javax.swing.JFrame {
     private void btnInformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformesActionPerformed
         // TODO add your handling code here:
         
-       
+        String codiProducte = ""+rutes.get(table.getSelectedRow()).getId();
         
+        int BUFFER_SIZE = 4096;
+        String url = urlJRS + "P1-T6-informe_JuanAntonioGarcia.pdf"
+                + "?codi=" + codiProducte;      // Emplenem el paràmetre "codi" de l'informe
+        // Si hi ha més paràmetres a passar, cal concatenar-los com "&" com:
+        // + "&nomParametre=valor&nomParametre=valor..."
+        URL obj;
+        int responseCode = -1;
+        HttpURLConnection con = null;
+        try {
+            obj = new URL(url);
+        
+        con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        String autenticacio = Base64.getEncoder().encodeToString((userJRS + ":" + passwordJRS).getBytes());
+        con.setRequestProperty("Authorization", "Basic " + autenticacio);
+        responseCode = con.getResponseCode();
+        
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            String fileName = "";
+            String disposition = con.getHeaderField("Content-Disposition");
+            String contentType = con.getContentType();
+            int contentLength = con.getContentLength();
+
+            if (disposition != null) {
+                // Obtenir el nom del fitxer a partir de la capçalera (Content-Disposition)
+                int index = disposition.indexOf("filename=");
+                if (index > 0) {
+                    fileName = disposition.substring(index + 10,
+                            disposition.length() - 1);
+                }
+            } else {
+                // Obtenir el nom del fitxer de dins la URL
+                int posArguments = url.lastIndexOf("?");
+                if (posArguments == -1) { // No hi ha arguments
+                    fileName = url.substring(url.lastIndexOf("/") + 1,
+                            url.length());
+                } else { // Hi ha arguments i cal eliminar-los per obtenir el nom del fitxer
+                    fileName = url.substring(url.lastIndexOf("/") + 1, posArguments);
+                }
+            }
+
+//            System.out.println("Content-Type = " + contentType);
+//            System.out.println("Content-Disposition = " + disposition);
+//            System.out.println("Content-Length = " + contentLength);
+//            System.out.println("fileName = " + fileName);
+//            System.out.println("url = " + url);
+
+            // Obrim InputStream des de HTTP connection
+            InputStream inputStream = con.getInputStream();
+            // Obrim OutputStream per enregistrar el fitxer
+            FileOutputStream outputStream = new FileOutputStream(fileName);
+            // Llegim i escrivim
+            int bytesRead = -1;
+            byte[] buffer = new byte[BUFFER_SIZE];
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            outputStream.close();
+            inputStream.close();
+
+//            System.out.println("Arxiu descarregat");
+            // Intentem obrir-lo en alguna aplicació del SO
+            if (Desktop.isDesktopSupported()) {
+                try {
+                    Desktop.getDesktop().open(new File(fileName));
+                } catch (IOException ex) {
+                    System.out.println("No hi ha aplicacions disponibles per obrir el fitxer");
+                }
+            }
+        } else {
+            System.out.println("Mètode 'GET' : " + url);
+            System.out.println("Codi resposta: " + responseCode);
+            System.out.println("Cap fitxer a descarregar");
+        }
+        con.disconnect();
+    
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Rutes.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Rutes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnInformesActionPerformed
 
     
