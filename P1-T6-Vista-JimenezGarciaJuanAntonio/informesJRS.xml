@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment>Propietats per connectar amb servidor JRS</comment>
-    <entry key="url">http://localhost:8080/jasperserver/Carpeta/</entry>
+    <entry key="url">http://localhost:8080/jasperserver/rest_v2/reports/Carpeta/</entry>
     <!--En aquesta url es suposa que JRS està escoltant perl port 8080 
         i a l'arrel de l'usuari té una carpeta "informes" amb subcarpeta "projecte1"-->
     <entry key="user">jasperadmin</entry>
