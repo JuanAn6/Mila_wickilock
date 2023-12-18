@@ -1,0 +1,2 @@
+user = juan
+contrasenya = juan1234

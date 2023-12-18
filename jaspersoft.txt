@@ -38,3 +38,8 @@ en C:\oracle\sqldeveloper\sqldeveloper\extensions\oracle.sqldeveloper.pgql\lib s
 Reiniciar servicio apache desde servicios.
 Localhost:8080 deberia aparecer el Apache Tomcat
 y Localhost:80
+
+
+
+
+http://localhost:8080/jasperserver/flow.html?_flowId=viewReport&reportUnit=/Carpeta/FP1_T6_informe_JuanAntonioGarcia/Paramter1=

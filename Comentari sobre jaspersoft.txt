@@ -1,0 +1,4 @@
+El report esta fet dins del jaspersoft studio, he intentat pujaro al servidor pero no ho he aconseguit,
+les clases de com es feia tot sobre jaspersoft no vaig poder seguir-les correctament perque estaba al hospital.
+
+Tinc dos resports fets el de la Carpeta esta fet amb sub report i el Carpeta2 esta fet amb mestre-detall.
