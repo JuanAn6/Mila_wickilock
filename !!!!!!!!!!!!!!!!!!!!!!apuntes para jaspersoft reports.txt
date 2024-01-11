@@ -1,0 +1,68 @@
+jasper soft
+
+-crear data adapter local poniendo el driver de jdbc y las url del classroom.
+
+
+REPORT
+-Crear grupo con el id de ruta (dando clic en la parte de la izquierda abajo en el icono de arriba del todo)
+
+-En la capçelera del grupo de ruta iran los valores (sin funcion de calculo)
+
+-Los titulos de los puntos iran dentro de la caçelera del grupo de rutas para que no se repitan
+
+-Los campos que se repetiran por cada ruta(puntos) iran en el detalle1
+
+-Salto de pagina en el menu de la deracha (primero marcando el grupo) new page
+
+-Hay que controllar los nulls :
+(marcar tdos los campos en los que van a salir valores y en el menu de la derecha en la pestaña text field : (blank when null))
+
+PARAMETRES
+-Crear parametre dentro de donde se pone la sentencia sql en la pestaña de parametro en la parte de abajo (ponerle nombre y descricpion)
+	is for promtp (para preguntar en el momento de ejecutar)
+	apartado de propertis es para sibirlo al servidor
+
+	
+select ... from ... left join ... on ... 
+-where cod = $P{parametre} or $P{parametre} is null 
+
+		// el or sirve para que si no ponen nada en el parametro se mostraran todos 
+		//para poner los dos que hacen falta en el proyecto: (xxx or xxx) and (xxx or xxx)
+orderby ...
+
+
+PARA SUBIRLO A LA NUBE
+
+-Crear server
+-Crear en el server el data adapter para que se pueda connectar a la base de datos
+
+DATA ADAPTER SERVER
+
+-(click derecho en el server -> new -> Data source-> import del que ya tenemos en local para que se haga solo
+
+SUBIR EL REPORT
+
+-En el desplegable de arriba project sale para publicar el jasperReport
+-Hay que crear una carpeta para guardarlo, ponerle un nombre  (para llamarlo desde la app de java hay que poner el identificador que sale)
+- el parametro overwrite (simpre por si acaso)
+
+-Datasource cojer del repoistorio el que hemos creado
+
+
+PARA HACER LA OPCION DESPLEGABLE
+- En los parametros de donde la consilta en el parametro que hemos creado en la propiedad porpertis 
+	(datasource el del server)
+	- nom para el control
+	- input type: Single selection Query
+	(query)
+	- importante poner el lenguaje
+	- en el ultimo hay que poner la query para que se llene el desplegable
+	- posar el camp que fa falta per filtarar y tambien el campo que quieres que se vea
+	(siguiente pestaña)
+	- value: la columna con la que se llena el paramtro.
+	-columnas: que quieres que aparezcan en el desplegable
+
+
+
+
+
