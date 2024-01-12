@@ -21,14 +21,6 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>CapaModel-1</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
                 <foreign-project>CapaPersistenciaJDBC</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
@@ -38,22 +30,6 @@
             </reference>
             <reference>
                 <foreign-project>InterficiePersistencia</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
-                <foreign-project>InterficiePersistencia-1</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
-                <foreign-project>P1-T6-CapaModel-GarciaJimenezJuanAntonio</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>
