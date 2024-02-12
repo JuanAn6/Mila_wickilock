@@ -1,1 +1,0 @@
-java -jar C:\Users\isard\Desktop\P1-T6-JimenezGarciaJuanAntonio\P1-T6-Vista-JimenezGarciaJuanAntonio\dist\P1-T6-Vista-JimenezGarciaJuanAntonio.jar capapersistenciajdbc.GestorBD
