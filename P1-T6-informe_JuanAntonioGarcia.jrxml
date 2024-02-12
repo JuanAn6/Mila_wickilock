@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8cf257ad-6cc0-48c9-8275-edbb2cf483fc">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="241"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="750"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.report.resource" value="/Carpeta/P1_T6_informe_JuanAntonioGarcia_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/Carpeta/P1_T6_informe_JuanAntonioGarcia"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Local Adapter"/>
+	<parameter name="Parameter1" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[$F{ID}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select u.login as "propietari_login", u.email as "propietari_email", r.titol as "titol", r.descripcio as "ruta_descripcio" , 
+r.desn_p as "desn_positiu", r.desn_n as "desn_negatiu", r.distancia as "distancia", r.temps as "temps", 
+r.dificultat , r.id , p.num, p.ruta, p.nom, p.descripcio , p.lat, p.lon, p.alt
+from rutes r  inner join usuaris u on u.login = r.propietari left join punts p on p.ruta = r.id 
+where ($P{Parameter1} is null or p.ruta =   $P{Parameter1})
+order by r.id asc, p.num asc]]>
+	</queryString>
+	<field name="propietari_login" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="propietari_login"/>
+		<property name="com.jaspersoft.studio.field.label" value="propietari_login"/>
+	</field>
+	<field name="propietari_email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="propietari_email"/>
+		<property name="com.jaspersoft.studio.field.label" value="propietari_email"/>
+	</field>
+	<field name="titol" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="titol"/>
+		<property name="com.jaspersoft.studio.field.label" value="titol"/>
+	</field>
+	<field name="ruta_descripcio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ruta_descripcio"/>
+		<property name="com.jaspersoft.studio.field.label" value="ruta_descripcio"/>
+	</field>
+	<field name="desn_positiu" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="desn_positiu"/>
+		<property name="com.jaspersoft.studio.field.label" value="desn_positiu"/>
+	</field>
+	<field name="desn_negatiu" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="desn_negatiu"/>
+		<property name="com.jaspersoft.studio.field.label" value="desn_negatiu"/>
+	</field>
+	<field name="distancia" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="distancia"/>
+		<property name="com.jaspersoft.studio.field.label" value="distancia"/>
+	</field>
+	<field name="temps" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="temps"/>
+		<property name="com.jaspersoft.studio.field.label" value="temps"/>
+	</field>
+	<field name="DIFICULTAT" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="DIFICULTAT"/>
+		<property name="com.jaspersoft.studio.field.label" value="DIFICULTAT"/>
+	</field>
+	<field name="ID" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="ID"/>
+	</field>
+	<field name="NUM" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="NUM"/>
+		<property name="com.jaspersoft.studio.field.label" value="NUM"/>
+	</field>
+	<field name="RUTA" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="RUTA"/>
+		<property name="com.jaspersoft.studio.field.label" value="RUTA"/>
+	</field>
+	<field name="NOM" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOM"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOM"/>
+	</field>
+	<field name="DESCRIPCIO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DESCRIPCIO"/>
+		<property name="com.jaspersoft.studio.field.label" value="DESCRIPCIO"/>
+	</field>
+	<field name="LAT" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="LAT"/>
+		<property name="com.jaspersoft.studio.field.label" value="LAT"/>
+	</field>
+	<field name="LON" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="LON"/>
+		<property name="com.jaspersoft.studio.field.label" value="LON"/>
+	</field>
+	<field name="ALT" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="ALT"/>
+		<property name="com.jaspersoft.studio.field.label" value="ALT"/>
+	</field>
+	<group name="Detalll" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{ID}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<staticText>
+					<reportElement x="0" y="0" width="81" height="30" uuid="f4f3c5bc-702f-4fb9-b69e-32941f58c07c">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="188180dd-9b66-4d58-b89f-2c02e334ad0e"/>
+					</reportElement>
+					<text><![CDATA[NUM]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="81" y="0" width="79" height="30" uuid="8d5f8161-27ea-4e0e-97cf-2adf0b5d214c">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="65cc31ed-58f3-456f-8340-13ed2c56cc17"/>
+					</reportElement>
+					<text><![CDATA[RUTA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="160" y="0" width="79" height="30" uuid="8400ea4e-a267-417d-b0cd-a8e042de9dbf">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b57534b-a620-4824-a22d-d681fe65f3b0"/>
+					</reportElement>
+					<text><![CDATA[NOM]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="239" y="0" width="79" height="30" uuid="ff123507-bc17-46f6-ab1e-2481d9671818">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3eef8948-d5fc-444b-baff-d68ac40d5548"/>
+					</reportElement>
+					<text><![CDATA[DESCRIPCIO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="318" y="0" width="79" height="30" uuid="c4bcb1c5-d233-4056-b73e-8196b81fc220">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0310adb3-eed9-4613-86fa-c3ea8c00c93d"/>
+					</reportElement>
+					<text><![CDATA[LAT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="397" y="0" width="79" height="30" uuid="a2ce442a-fcfb-40f7-934a-016436e05aca">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="79830f54-3cc8-4327-b657-6242eb79c365"/>
+					</reportElement>
+					<text><![CDATA[LON]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="476" y="0" width="79" height="30" uuid="6a741d83-689b-4cd6-b429-59b131905345">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="888ab806-6c15-4b82-8be7-c31333e5356e"/>
+					</reportElement>
+					<text><![CDATA[ALT]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="10" width="200" height="50" uuid="653bb2c8-bf09-4eca-99ac-8b75692fb59a"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Milà WikiLock]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41">
+			<staticText>
+				<reportElement x="0" y="11" width="70" height="30" uuid="ae7292c7-fde2-468f-a743-baf400046ec7"/>
+				<text><![CDATA[Titol]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="11" width="100" height="30" uuid="677fc31e-ab7d-490f-ae15-5a81c247a7c2"/>
+				<text><![CDATA[Descripció]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="11" width="68" height="30" uuid="f0c46392-7667-4f75-816d-83c5579efc71"/>
+				<text><![CDATA[Distancia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="11" width="61" height="30" uuid="91b97e43-4915-4bad-b160-16dafd277403"/>
+				<text><![CDATA[Temps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="10" width="50" height="30" uuid="018679a7-9c3e-4935-b7eb-7bc4c9003aaa"/>
+				<text><![CDATA[Desnivell positiu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="10" width="50" height="30" uuid="1e956a87-7261-4d38-9147-8e3f54bc1dc5"/>
+				<text><![CDATA[Desnivell negatiu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="10" width="50" height="30" uuid="2d863ad9-0660-48ac-870f-fa3af92ed2f4"/>
+				<text><![CDATA[Dificultat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="10" width="100" height="30" uuid="79a49bc2-d1ec-469e-8167-aad1f6d83ffa"/>
+				<text><![CDATA[Propietari]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30">
+			<textField>
+				<reportElement x="301" y="0" width="50" height="30" uuid="1fc612c0-d08e-430d-9d0d-1644e9b4ddce"/>
+				<textFieldExpression><![CDATA[$F{desn_positiu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="241" y="0" width="60" height="30" uuid="f2245c41-a1a7-4c4d-b936-ad5de9e04f34"/>
+				<textFieldExpression><![CDATA[$F{temps}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="0" width="60" height="30" uuid="7aa05876-0164-42f8-a4f5-64c59efae608"/>
+				<textFieldExpression><![CDATA[$F{propietari_login}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="70" height="30" uuid="f5fe6970-c30c-4bee-93ff-24f13dc24f8a"/>
+				<textFieldExpression><![CDATA[$F{titol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="491" y="0" width="70" height="30" uuid="66054175-290a-4276-900b-6224d3498b69"/>
+				<textFieldExpression><![CDATA[$F{propietari_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="0" width="100" height="30" uuid="9bfe7972-43ca-4f89-8c4b-c47a494a8dbc"/>
+				<textFieldExpression><![CDATA[$F{ruta_descripcio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="0" width="70" height="30" uuid="29b748a0-45d7-4f8d-a872-a45d92b51ddd"/>
+				<textFieldExpression><![CDATA[$F{distancia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="0" width="50" height="30" uuid="ec8f0cf1-7d97-4c51-8fb9-d404e438c1df"/>
+				<textFieldExpression><![CDATA[$F{desn_negatiu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="31" height="30" uuid="f987e5f9-50ac-45ec-8e21-f89598efd5ea"/>
+				<textFieldExpression><![CDATA[$F{DIFICULTAT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Immediate">
+			<textField>
+				<reportElement x="0" y="0" width="81" height="30" uuid="7f1571e9-bb10-4ce7-ae00-360cd78e1058">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="188180dd-9b66-4d58-b89f-2c02e334ad0e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{NUM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="0" width="79" height="30" uuid="95680b03-f8e2-4f9b-98dd-21bc07c900f7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="65cc31ed-58f3-456f-8340-13ed2c56cc17"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{RUTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="0" width="79" height="30" uuid="1521a977-4218-4483-b390-bc13d983f0ea">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b57534b-a620-4824-a22d-d681fe65f3b0"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{NOM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="0" width="79" height="30" uuid="e90f0669-5d6d-4e9e-9b52-c2f999a92516">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3eef8948-d5fc-444b-baff-d68ac40d5548"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{DESCRIPCIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="0" width="79" height="30" uuid="ba282c1b-406d-49c3-91ce-8f3abfdabf52">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0310adb3-eed9-4613-86fa-c3ea8c00c93d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{LAT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="0" width="79" height="30" uuid="8982cdeb-8958-4a08-a549-d50033802023">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="79830f54-3cc8-4327-b657-6242eb79c365"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{LON}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="0" width="79" height="30" uuid="17ff2ab6-5448-43dd-a6f8-7ab2f50a6b0f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="888ab806-6c15-4b82-8be7-c31333e5356e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{ALT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="450" y="10" width="100" height="30" uuid="c532338d-abbb-458f-8b17-50bfbc8e8eba"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="15" width="100" height="30" uuid="5be99a22-7576-4c15-a3cd-bec482aa1fdf"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
